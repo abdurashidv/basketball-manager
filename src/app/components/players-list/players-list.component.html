@@ -1,0 +1,40 @@
+<div class="container-fluid list-header">
+  <div class="row">
+    <div class="col-12 text-center font-weight-bold" style="margin-top: 55px;">
+      Список Игроков
+    </div>
+  </div>
+</div>
+<table class="table">
+  <thead>
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">Имя</th>
+    <th scope="col">Возраст</th>
+    <th scope="col">Стоимость</th>
+    <th scope="col">Статус</th>
+    <th scope="col"></th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let player of playersList"
+      [ngClass]="{
+              'text-primary':player.getStatus() === AVAILABLE,
+              'text-danger':player.getStatus() === CONTRACT}"
+  >
+    <th>{{player.getId()}}</th>
+    <td>{{player.getName()}}</td>
+    <td>{{player.getAge()}}</td>
+    <td>{{player.getPrice()}}</td>
+    <td>{{player.getStatus()}}</td>
+    <td>
+      <button
+        [hidden]="player.getStatus() == CONTRACT"
+        (click)="addNewPlayer(player)"
+        type="button" class="btn btn-primary">
+        &#43;
+      </button>
+    </td>
+  </tr>
+  </tbody>
+</table>
